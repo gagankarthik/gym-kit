@@ -1,69 +1,50 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import Icon, { type IconName } from "@/components/Icons";
+import Logo from "@/components/Logo";
+import { FEATURED_ID, getExercise } from "@/lib/exercises";
 
-export default function Home() {
+const HOW: { icon: IconName; title: string; text: string }[] = [
+  { icon: "bars2", title: "Answer a few questions", text: "Your level, where you train, your kit and what to work." },
+  { icon: "grid", title: "Get your plan", text: "6 to 10 exercises picked for you. Shuffle any time." },
+  { icon: "play", title: "Follow the timer", text: "Work, rest, repeat. Beeps tell you when to switch." },
+];
+
+export default function Start() {
+  const hero = getExercise(FEATURED_ID)!;
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="start">
+      <section className="start-hero">
+        <nav className="topbar">
+          <Logo onPlate />
+          <Link href="/exercises" className="view-all">
+            <Icon name="grid" size={16} /> All exercises
+          </Link>
+        </nav>
+        <h1 className="start-title">Press start. We&apos;ll keep time.</h1>
+        <Image className="start-demo" src={hero.gif} alt="Animated push-up demonstration" width={280} height={280} unoptimized loading="eager" fetchPriority="high" />
+      </section>
+
+      <section className="start-body">
+        <ol className="how">
+          {HOW.map((h) => (
+            <li key={h.title}>
+              <span className="how-icon">
+                <Icon name={h.icon} />
+              </span>
+              <span>
+                <b>{h.title}</b>
+                <small>{h.text}</small>
+              </span>
+            </li>
+          ))}
+        </ol>
+        <div className="action-bar">
+          <Link href="/workout" className="primary">
+            <Icon name="play" size={20} /> Start workout
+          </Link>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }

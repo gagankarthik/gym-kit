@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# imported exercise media (node scripts/import-exercises.mjs)
+/public/exercises

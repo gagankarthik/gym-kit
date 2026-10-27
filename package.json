@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "import-exercises": "node scripts/import-exercises.mjs",
+    "test": "node --test lib/workout.test.ts"
   },
   "dependencies": {
     "next": "16.4.3",
