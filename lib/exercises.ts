@@ -10,7 +10,7 @@ export type Exercise = {
   equipment: string;
   steps: string[];
   image: string;
-  gif: string;
+  gif: string; // animated demo (WebP after import; field name kept from the dataset)
 };
 
 // Equipment you'd realistically have at home (the kit list lives with the plan builder);
